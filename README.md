@@ -1,16 +1,15 @@
-# colour-tracker
-
-This source code tracks the largest object of a specified colour
+# colour tracker
+The colour tracker repository aims to provide basic examples of using opencv. Use cases here include colour tracking and object following via colour tracking.
 
 ## Camera Follower
-This source code controls 2 servos, one mounted on top of the other. This allows for the mounted camera to have 2 axis of freedom
+This source code controls 2 servos, one mounted on top of the other. This allows for the mounted camera to have 2 axis of freedom. It is to be used for the object tracking project.
 
 ## Object tracking
 ### Requirements:
 * opencv 3.4.1
-* pyserial
+* pyserial for python3
 
-the object tracking file allows the camera (webcam or usb camera) to track an object of a unique colour. You'll have to alter the upper and lower limits of the colour detection parameters to suit the colour you wish to track. (a hot pink postit in my example)
+the object tracking file allows the camera (webcam or usb camera) to track an object of a unique colour. You'll have to alter the upper and lower limits of the colour detection parameters to suit the colour you wish to track. (a hot pink post-it in my example)
 
 ## Picamera object tracking
 ### Requirements:

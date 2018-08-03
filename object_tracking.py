@@ -3,13 +3,14 @@ import numpy as np
 import cv2
 import imutils
 
+# upper and lower bounds for colour detection, in HSV
 pinkLower = np.array([145, 100, 80])
 pinkUpper = np.array([165, 255, 255])
 
-cap = cv2.VideoCapture(0)
+cap = cv2.VideoCapture(0) # using webcam capture
 
 img = cap.read()[1]
-height, width, channels = img.shape
+height, width, channels = img.shape # getting the resolution of the capture to find center of the capture
 print("height: {}, width: {}".format(height, width))
 
 while(True):
@@ -20,13 +21,12 @@ while(True):
     blurred = cv2.GaussianBlur(frame, (11,11), 0)
     hsv = cv2.cvtColor(blurred, cv2.COLOR_BGR2HSV)
 
+    # image processing
     mask = cv2.inRange(hsv, pinkLower, pinkUpper)
     mask = cv2.erode(mask, None, iterations=2)
     mask = cv2.dilate(mask, None, iterations=2)
 
-
-    
-
+    # getting contours
     cnts = cv2.findContours(mask.copy(), cv2.RETR_EXTERNAL, cv2.CHAIN_APPROX_SIMPLE)
     cnts = cnts[0] if imutils.is_cv2() else cnts[1]
     center = None
@@ -44,7 +44,7 @@ while(True):
     else:
         center = (int(width/2), int(height/2))
 
-    # drawing lines for visualis
+    # drawing lines for visualisation
     cv2.line(frame, (int(width/2 + 30), 0), (int(width/2 + 30), height), (255, 0, 127), 1)
     cv2.line(frame, (int(width/2 - 30), 0), (int(width/2 - 30), height), (255, 0, 127), 1)
     cv2.line(frame, (0, int(height/2 + 30)), (width, int(height/2 + 30)), (255, 0, 127), 1)
