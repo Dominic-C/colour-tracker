@@ -1,18 +1,28 @@
-# colour tracker
+# Colour Tracking (OpenCV)
 The colour tracker repository aims to provide basic examples of using opencv. Use cases here include colour tracking and object following via colour tracking.
 
 ## Camera Follower
-This source code controls 2 servos, one mounted on top of the other. This allows for the mounted camera to have 2 axis of freedom. It is to be used for the object tracking project.
-
-## Object tracking
 ### Requirements:
-* opencv 3.4.1
+* OpenCV 3.4.1
 * pyserial for python3
+* Arduino and 2 servos
+* RaspberryPi camera and RaspberryPi
 
-the object tracking file allows the camera (webcam or usb camera) to track an object of a unique colour. You'll have to alter the upper and lower limits of the colour detection parameters to suit the colour you wish to track. (a hot pink post-it in my example)
+Contains source code for an an Arduino which takes in serial input. The accompanying python code would run on a raspberry pi or any computer with opencv installed.
 
-## Picamera object tracking
+**concept:**
+1. The camera masks out a unique colour (hot pink in my example) and creates a border around it with OpenCV.
+
+<img src=Images/Mask.png width=400>
+
+2. If the center of the border is not in a specified region on the screen, serial input will be sent to the arduino. The arduino recieves these signals and moves the camera to center the object.
+
+<img src=Images/Guidelines.png width=400>
+
+Purple lines illustrate the boundary at which the camera considers an object centered.
+
+## Object Tracking
 ### Requirements:
-* Raspberrypi camera
+* OpenCV 3.4.1
 
-This combines ideas from the previous 2 source codes. The main idea is to get a raspberrypi camera that is mounted on servos to follow an object of a unique colour. Do note that the upper and lower limits of the colour detection parameters may defer on different cameras, so please check your parameters if there's something wrong.
+Contains the basic implementation for colour tracking, tested on a laptop. Uses the same processes to recognize objects, but no arduino and camera movement capabilities.
